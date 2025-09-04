@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rocco Marinelli - Digital Content Strategist</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Alpine.js for interactivity -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom Tailwind Config */
+        @layer utilities {
+            .text-telstra-blue {
+                color: #00b0eb;
+            }
+            .bg-telstra-blue {
+                background-color: #00b0eb;
+            }
+            .bg-telstra-purple {
+                background-color: #742282;
+            }
+            .gradient-telstra {
+                background: linear-gradient(135deg, #00b0eb 0%, #742282 100%);
+            }
+            .gradient-orange {
+                background: linear-gradient(135deg, #FF6900 0%, #E15D00 100%);
+            }
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        /* Telstra Background Pattern */
+        .telstra-bg {
+            background-image: 
+                linear-gradient(rgba(0, 176, 235, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 176, 235, 0.03) 1px, transparent 1px),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.02"><text x="50" y="50" font-size="40" fill="%2300b0eb" text-anchor="middle" dominant-baseline="middle" transform="rotate(-45 50 50)">T</text></svg>');
+            background-size: 50px 50px, 50px 50px, 100px 100px;
+            background-position: 0 0, 0 0, 0 0;
+        }
+        
+        /* Glass morphism effects */
+        .glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        /* Print styles */
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            body {
+                background: white !important;
+            }
+            .telstra-bg {
+                background: none !important;
+            }
+        }
+        
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #00b0eb;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0090c7;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 telstra-bg" x-data="{ editMode: false, darkMode: false }">
+    
+    <!-- Floating Edit Toggle Button -->
+    <button @click="editMode = !editMode" 
+            class="fixed top-4 right-4 z-50 px-4 py-2 bg-telstra-blue text-white rounded-full shadow-lg hover:shadow-xl transition-all no-print"
+            :class="editMode ? 'bg-green-500' : 'bg-telstra-blue'">
+        <i class="fas" :class="editMode ? 'fa-check' : 'fa-edit'"></i>
+        <span x-text="editMode ? 'Editing' : 'Edit Mode'"></span>
+    </button>
+    
+    <!-- Main Container -->
+    <div class="container mx-auto max-w-7xl p-4 py-8">
+        
+        <!-- Header Section with Gradient and Animation -->
+        <header class="glass rounded-2xl shadow-2xl overflow-hidden mb-8" data-aos="fade-down">
+            <div class="gradient-telstra p-8 md:p-12 relative overflow-hidden">
+                <!-- Decorative Telstra T Pattern -->
+                <div class="absolute inset-0 opacity-10">
+                    <div class="absolute top-0 right-0 text-white text-[200px] font-bold transform rotate-12">T</div>
+                    <div class="absolute bottom-0 left-0 text-white text-[200px] font-bold transform -rotate-12">T</div>
+                </div>
+                
+                <!-- Content -->
+                <div class="relative z-10 text-center text-white">
+                    <h1 class="text-5xl md:text-6xl font-bold mb-4 tracking-tight" 
+                        :contenteditable="editMode">
+                        Rocco Marinelli
+                    </h1>
+                    <p class="text-xl md:text-2xl mb-6 opacity-95" 
+                       :contenteditable="editMode">
+                        Digital Content Strategist | Head of Digital Content Candidate
+                    </p>
+                    
+                    <!-- Contact Pills -->
+                    <div class="flex flex-wrap justify-center gap-4 mt-8">
+                        <a href="mailto:rocco.marineli@gmail.com" 
+                           class="bg-white/20 backdrop-blur-md px-6 py-3 rounded-full hover:bg-white/30 transition-all transform hover:scale-105">
+                            <i class="fas fa-envelope mr-2"></i>
+                            <span :contenteditable="editMode" @click.prevent.stop>rocco.marineli@gmail.com</span>
+                        </a>
+                        <a href="tel:0490038888" 
+                           class="bg-white/20 backdrop-blur-md px-6 py-3 rounded-full hover:bg-white/30 transition-all transform hover:scale-105">
+                            <i class="fas fa-phone mr-2"></i>
+                            <span :contenteditable="editMode" @click.prevent.stop>0490038888</span>
+                        </a>
+                        <div class="bg-white/20 backdrop-blur-md px-6 py-3 rounded-full">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            <span :contenteditable="editMode">Australia (Flexible)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Executive Summary with Glass Effect -->
+        <section class="glass rounded-2xl shadow-xl p-8 mb-8" data-aos="fade-up">
+            <h2 class="text-3xl font-bold text-telstra-blue mb-4">Executive Summary</h2>
+            <p class="text-gray-700 leading-relaxed text-lg" :contenteditable="editMode">
+                I'm a digital content strategist with 15+ years building captivating content experiences for Australia's leading brands. I'm currently working in the Content Design Chapter at Telstra, having gained experience driving personalised content in the My Telstra App Get Help space and more recently in P2O optimising consideration to purchases.
+
+I have led creative teams and agencies of 20+ specialists, managing multi-million dollar content initiatives and delivering measurable ROI through data driven content strategies.
+
+I'm experienced in digital transformation leadership and creating customer experiences that resonate and drive business growth. More recently as an autodidact in the nascent AI space I'm eager to play a role in the post search engine driven landscape of AI agents.
+            </p>
+        </section>
+        
+        <!-- Main Content Grid -->
+        <div class="grid lg:grid-cols-3 gap-8">
+            
+            <!-- Left Sidebar -->
+            <aside class="lg:col-span-1 space-y-6">
+                
+                <!-- Core Competencies Card -->
+                <div class="glass rounded-2xl shadow-xl p-6" data-aos="fade-right">
+                    <h3 class="text-2xl font-bold text-telstra-blue mb-6 flex items-center">
+                        <i class="fas fa-star mr-3"></i>Core Competencies
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-telstra-blue pl-4">
+                            <h4 class="font-semibold text-gray-800 mb-1" :contenteditable="editMode">Agentic AI Exploration</h4>
+                            <p class="text-sm text-gray-600" :contenteditable="editMode">AI implementation, automated workflow, personalisation engines, AI Command Line Interface programming</p>
+                        </div>
+                        
+                        <div class="border-l-4 border-telstra-purple pl-4">
+                            <h4 class="font-semibold text-gray-800 mb-1" :contenteditable="editMode">Enterprise Leadership</h4>
+                            <p class="text-sm text-gray-600" :contenteditable="editMode">Cross functional teams, digital transformation, change management, stakeholder alignment, agency management</p>
+                        </div>
+                        
+                        <div class="border-l-4 border-orange-500 pl-4">
+                            <h4 class="font-semibold text-gray-800 mb-1" :contenteditable="editMode">Technical Platforms</h4>
+                            <p class="text-sm text-gray-600" :contenteditable="editMode">Adobe experience manager, content governance, analytics optimisation, CMS migrations</p>
+                        </div>
+                        
+                        <div class="border-l-4 border-telstra-blue pl-4">
+                            <h4 class="font-semibold text-gray-800 mb-1" :contenteditable="editMode">Customer Experience</h4>
+                            <p class="text-sm text-gray-600" :contenteditable="editMode">Mapping, behavioural targeting, accessibility compliance, user research</p>
+                        </div>
+                        
+                        <div class="border-l-4 border-telstra-purple pl-4">
+                            <h4 class="font-semibold text-gray-800 mb-1" :contenteditable="editMode">Business Impact</h4>
+                            <p class="text-sm text-gray-600" :contenteditable="editMode">Optimisation, customer acquisition, performance measurement, conversion optimisation</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Key Achievements Card -->
+                <div class="glass rounded-2xl shadow-xl p-6" data-aos="fade-right" data-aos-delay="100">
+                    <h3 class="text-2xl font-bold text-telstra-blue mb-6 flex items-center">
+                        <i class="fas fa-trophy mr-3"></i>Key Achievements
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-gradient-to-r from-telstra-blue/10 to-transparent p-4 rounded-lg border-l-4 border-telstra-blue">
+                            <h4 class="font-semibold text-gray-800 mb-1" :contenteditable="editMode">Digital Transformation</h4>
+                            <p class="text-sm text-gray-600" :contenteditable="editMode">Lead content workstream for $2M+ digital transformation projects affecting 9M+ customers</p>
+                        </div>
+                        
+                        <div class="bg-gradient-to-r from-purple-100 to-transparent p-4 rounded-lg border-l-4 border-telstra-purple">
+                            <h4 class="font-semibold text-gray-800 mb-1" :contenteditable="editMode">Team Management</h4>
+                            <p class="text-sm text-gray-600" :contenteditable="editMode">Successfully manage teams of 15+ specialists plus agencies with $2M+ budget responsibility</p>
+                        </div>
+                        
+                        <div class="bg-gradient-to-r from-orange-100 to-transparent p-4 rounded-lg border-l-4 border-orange-500">
+                            <h4 class="font-semibold text-gray-800 mb-1" :contenteditable="editMode">Customer Experience</h4>
+                            <p class="text-sm text-gray-600" :contenteditable="editMode">10-point NPS improvement through strategic content redesign reducing support queries by 15%</p>
+                        </div>
+                        
+                        <div class="bg-gradient-to-r from-telstra-blue/10 to-transparent p-4 rounded-lg border-l-4 border-telstra-blue">
+                            <h4 class="font-semibold text-gray-800 mb-1" :contenteditable="editMode">SEO Performance</h4>
+                            <p class="text-sm text-gray-600" :contenteditable="editMode">Achieved top 5 rankings for 50+ competitive keywords driving massive organic traffic</p>
+                        </div>
+                        
+                        <div class="bg-gradient-to-r from-purple-100 to-transparent p-4 rounded-lg border-l-4 border-telstra-purple">
+                            <h4 class="font-semibold text-gray-800 mb-1" :contenteditable="editMode">Process Innovation</h4>
+                            <p class="text-sm text-gray-600" :contenteditable="editMode">Implemented agile methodologies reducing time to market by 25% across organisations</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Education Card -->
+                <div class="glass rounded-2xl shadow-xl p-6" data-aos="fade-right" data-aos-delay="200">
+                    <h3 class="text-2xl font-bold text-telstra-blue mb-6 flex items-center">
+                        <i class="fas fa-graduation-cap mr-3"></i>Education
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-telstra-blue pl-4">
+                            <h4 class="font-semibold text-gray-800" :contenteditable="editMode">Bachelor of Business</h4>
+                            <p class="text-sm text-gray-600" :contenteditable="editMode">Marketing Major<br>Monash University</p>
+                        </div>
+                        
+                        <div class="border-l-4 border-telstra-purple pl-4">
+                            <h4 class="font-semibold text-gray-800" :contenteditable="editMode">Bachelor of Communication</h4>
+                            <p class="text-sm text-gray-600" :contenteditable="editMode">Journalism Major<br>Monash University</p>
+                        </div>
+                        
+                        <div class="border-l-4 border-orange-500 pl-4">
+                            <h4 class="font-semibold text-gray-800" :contenteditable="editMode">Bachelor of Arts</h4>
+                            <p class="text-sm text-gray-600" :contenteditable="editMode">Professional Writing<br>Deakin University</p>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            
+            <!-- Main Content Area -->
+            <main class="lg:col-span-2">
+                <div class="glass rounded-2xl shadow-xl p-8" data-aos="fade-left">
+                    <h2 class="text-3xl font-bold text-telstra-blue mb-8 flex items-center">
+                        <i class="fas fa-briefcase mr-3"></i>Professional Experience
+                    </h2>
+                    
+                    <!-- Timeline -->
+                    <div class="relative">
+                        <!-- Timeline Line -->
+                        <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-telstra-blue via-telstra-purple to-orange-500"></div>
+                        
+                        <!-- Jobs -->
+                        <div class="space-y-8">
+                            
+                            <!-- Telstra -->
+                            <div class="relative pl-20" data-aos="fade-up">
+                                <div class="absolute left-6 w-4 h-4 bg-telstra-blue rounded-full -translate-x-1/2 ring-4 ring-white"></div>
+                                <div class="bg-gradient-to-r from-telstra-blue/5 to-transparent rounded-xl p-6 hover:shadow-lg transition-all">
+                                    <div class="flex flex-wrap justify-between items-start mb-3">
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800" :contenteditable="editMode">CONTENT DESIGNER</h3>
+                                            <p class="text-telstra-blue font-semibold" :contenteditable="editMode">Telstra</p>
+                                        </div>
+                                        <span class="bg-telstra-blue/10 text-telstra-blue px-4 py-1 rounded-full text-sm font-medium" :contenteditable="editMode">2022 - ongoing</span>
+                                    </div>
+                                    <p class="text-gray-600 mb-4" :contenteditable="editMode">
+                                        Content Design, Accessibility and Figma strategy for Australia's largest telecommunications company, focusing on accessibility-first, customer centric content across multiple digital platforms serving 8.7M+ digitally active users.
+                                    </p>
+                                    <div class="space-y-2">
+                                        <p class="text-sm text-gray-700 flex items-start"><i class="fas fa-check text-telstra-blue mr-2 mt-1"></i><span :contenteditable="editMode">Develop content journeys that align with Telstra's voice across app and web channels</span></p>
+                                        <p class="text-sm text-gray-700 flex items-start"><i class="fas fa-check text-telstra-blue mr-2 mt-1"></i><span :contenteditable="editMode">Ensure all content meets WCAG 2.1 AA accessibility standards</span></p>
+                                        <p class="text-sm text-gray-700 flex items-start"><i class="fas fa-check text-telstra-blue mr-2 mt-1"></i><span :contenteditable="editMode">Conduct user research to tailor content to audience preferences and behaviours</span></p>
+                                        <p class="text-sm text-gray-700 flex items-start"><i class="fas fa-check text-telstra-blue mr-2 mt-1"></i><span :contenteditable="editMode">Member of key internal guild evangelising best practices and new tools like Figma & Copilot</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Cars24 -->
+                            <div class="relative pl-20" data-aos="fade-up">
+                                <div class="absolute left-6 w-4 h-4 bg-telstra-purple rounded-full -translate-x-1/2 ring-4 ring-white"></div>
+                                <div class="bg-gradient-to-r from-purple-50 to-transparent rounded-xl p-6 hover:shadow-lg transition-all">
+                                    <div class="flex flex-wrap justify-between items-start mb-3">
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800" :contenteditable="editMode">HEAD OF CONTENT</h3>
+                                            <p class="text-telstra-purple font-semibold" :contenteditable="editMode">Cars24</p>
+                                        </div>
+                                        <span class="bg-purple-100 text-purple-700 px-4 py-1 rounded-full text-sm font-medium" :contenteditable="editMode">2018</span>
+                                    </div>
+                                    <p class="text-gray-600 mb-4" :contenteditable="editMode">
+                                        Build comprehensive content strategy from zero for Australian start-up disrupting the used car market through entirely digital buying experience.
+                                    </p>
+                                    <div class="space-y-2">
+                                        <p class="text-sm text-gray-700 flex items-start"><i class="fas fa-check text-telstra-purple mr-2 mt-1"></i><span :contenteditable="editMode">Led team of 20 agency specialists managing $500K annual content budget</span></p>
+                                        <p class="text-sm text-gray-700 flex items-start"><i class="fas fa-check text-telstra-purple mr-2 mt-1"></i><span :contenteditable="editMode">Built content hub achieving 15K+ monthly organic visitors within 6 months</span></p>
+                                        <p class="text-sm text-gray-700 flex items-start"><i class="fas fa-check text-telstra-purple mr-2 mt-1"></i><span :contenteditable="editMode">Content strategy contributed to 20% increase in qualified leads</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Techtronic -->
+                            <div class="relative pl-20" data-aos="fade-up">
+                                <div class="absolute left-6 w-4 h-4 bg-orange-500 rounded-full -translate-x-1/2 ring-4 ring-white"></div>
+                                <div class="bg-gradient-to-r from-orange-50 to-transparent rounded-xl p-6 hover:shadow-lg transition-all">
+                                    <div class="flex flex-wrap justify-between items-start mb-3">
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800" :contenteditable="editMode">CONTENT STRATEGY MANAGER</h3>
+                                            <p class="text-orange-600 font-semibold" :contenteditable="editMode">Techtronic Industries</p>
+                                        </div>
+                                        <span class="bg-orange-100 text-orange-700 px-4 py-1 rounded-full text-sm font-medium" :contenteditable="editMode">2018 - 2021</span>
+                                    </div>
+                                    <p class="text-gray-600 mb-4" :contenteditable="editMode">
+                                        Lead content strategy for Australia's #1 power tool brand Ryobi plus Hoover, AEG. Managed creative teams across multiple brands.
+                                    </p>
+                                    <div class="space-y-2">
+                                        <p class="text-sm text-gray-700 flex items-start"><i class="fas fa-check text-orange-500 mr-2 mt-1"></i><span :contenteditable="editMode">Managed team of 12+ designers, writers, editors across 4 major brands</span></p>
+                                        <p class="text-sm text-gray-700 flex items-start"><i class="fas fa-check text-orange-500 mr-2 mt-1"></i><span :contenteditable="editMode">Delivered 250+ campaigns annually with 95% on-time delivery rate</span></p>
+                                        <p class="text-sm text-gray-700 flex items-start"><i class="fas fa-check text-orange-500 mr-2 mt-1"></i><span :contenteditable="editMode">Increased brand engagement by 35% through innovative content solutions</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- iSelect -->
+                            <div class="relative pl-20" data-aos="fade-up">
+                                <div class="absolute left-6 w-4 h-4 bg-telstra-blue rounded-full -translate-x-1/2 ring-4 ring-white"></div>
+                                <div class="bg-gradient-to-r from-telstra-blue/5 to-transparent rounded-xl p-6 hover:shadow-lg transition-all">
+                                    <div class="flex flex-wrap justify-between items-start mb-3">
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800" :contenteditable="editMode">CONTENT & SOCIAL MEDIA MARKETING MANAGER</h3>
+                                            <p class="text-telstra-blue font-semibold" :contenteditable="editMode">iSelect</p>
+                                        </div>
+                                        <span class="bg-telstra-blue/10 text-telstra-blue px-4 py-1 rounded-full text-sm font-medium" :contenteditable="editMode">2018</span>
+                                    </div>
+                                    <p class="text-gray-600 mb-4" :contenteditable="editMode">
+                                        Developed comprehensive content marketing strategies for highly competitive comparison sectors including energy, health and insurance.
+                                    </p>
+                                    <div class="space-y-2">
+                                        <p class="text-sm text-gray-700 flex items-start"><i class="fas fa-check text-telstra-blue mr-2 mt-1"></i><span :contenteditable="editMode">Managed team of 8+ content specialists and SEO & SEM managers</span></p>
+                                        <p class="text-sm text-gray-700 flex items-start"><i class="fas fa-check text-telstra-blue mr-2 mt-1"></i><span :contenteditable="editMode">Increased conversion rate by 15-20% on key landing pages</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Transurban -->
+                            <div class="relative pl-20" data-aos="fade-up">
+                                <div class="absolute left-6 w-4 h-4 bg-telstra-purple rounded-full -translate-x-1/2 ring-4 ring-white"></div>
+                                <div class="bg-gradient-to-r from-purple-50 to-transparent rounded-xl p-6 hover:shadow-lg transition-all">
+                                    <div class="flex flex-wrap justify-between items-start mb-3">
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800" :contenteditable="editMode">DIGITAL CONTENT LEAD</h3>
+                                            <p class="text-telstra-purple font-semibold" :contenteditable="editMode">Transurban</p>
+                                        </div>
+                                        <span class="bg-purple-100 text-purple-700 px-4 py-1 rounded-full text-sm font-medium" :contenteditable="editMode">2015 - 2018</span>
+                                    </div>
+                                    <p class="text-gray-600 mb-4" :contenteditable="editMode">
+                                        Lead end-to-end digital content production for major infrastructure company's digital transformation initiative.
+                                    </p>
+                                    <div class="space-y-2">
+                                        <p class="text-sm text-gray-700 flex items-start"><i class="fas fa-check text-telstra-purple mr-2 mt-1"></i><span :contenteditable="editMode">Digital Product Owner for $1M+ digital transformation project</span></p>
+                                        <p class="text-sm text-gray-700 flex items-start"><i class="fas fa-check text-telstra-purple mr-2 mt-1"></i><span :contenteditable="editMode">Improved customer help section, increasing NPS by 10 points</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Consultant -->
+                            <div class="relative pl-20" data-aos="fade-up">
+                                <div class="absolute left-6 w-4 h-4 bg-orange-500 rounded-full -translate-x-1/2 ring-4 ring-white"></div>
+                                <div class="bg-gradient-to-r from-orange-50 to-transparent rounded-xl p-6 hover:shadow-lg transition-all">
+                                    <div class="flex flex-wrap justify-between items-start mb-3">
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800" :contenteditable="editMode">CONTENT STRATEGIST</h3>
+                                            <p class="text-orange-600 font-semibold" :contenteditable="editMode">Consultant - Various Roles</p>
+                                        </div>
+                                        <span class="bg-orange-100 text-orange-700 px-4 py-1 rounded-full text-sm font-medium" :contenteditable="editMode">2012 - 2015</span>
+                                    </div>
+                                    <p class="text-gray-600 mb-4" :contenteditable="editMode">
+                                        Consulted on large digital transformation projects for Australia's most recognisable brands including Medibank, RMIT, City of Melbourne.
+                                    </p>
+                                    <div class="space-y-2">
+                                        <p class="text-sm text-gray-700 flex items-start"><i class="fas fa-check text-orange-500 mr-2 mt-1"></i><span :contenteditable="editMode">Lead content strategy for CMS migrations worth $2M+</span></p>
+                                        <p class="text-sm text-gray-700 flex items-start"><i class="fas fa-check text-orange-500 mr-2 mt-1"></i><span :contenteditable="editMode">Delivered user journeys, content audits and taxonomy planning</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Sensis -->
+                            <div class="relative pl-20" data-aos="fade-up">
+                                <div class="absolute left-6 w-4 h-4 bg-telstra-blue rounded-full -translate-x-1/2 ring-4 ring-white"></div>
+                                <div class="bg-gradient-to-r from-telstra-blue/5 to-transparent rounded-xl p-6 hover:shadow-lg transition-all">
+                                    <div class="flex flex-wrap justify-between items-start mb-3">
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-800" :contenteditable="editMode">DIGITAL PRODUCER</h3>
+                                            <p class="text-telstra-blue font-semibold" :contenteditable="editMode">Sensis (Telstra Subsidiary)</p>
+                                        </div>
+                                        <span class="bg-telstra-blue/10 text-telstra-blue px-4 py-1 rounded-full text-sm font-medium" :contenteditable="editMode">2007 - 2012</span>
+                                    </div>
+                                    <p class="text-gray-600 mb-4" :contenteditable="editMode">
+                                        Conduit between Business and Build Team. Oversaw builds, prioritised features, agile practitioner and evangelist.
+                                    </p>
+                                    <div class="space-y-2">
+                                        <p class="text-sm text-gray-700 flex items-start"><i class="fas fa-check text-telstra-blue mr-2 mt-1"></i><span :contenteditable="editMode">SEO suburb and page indexing on WhereIs</span></p>
+                                        <p class="text-sm text-gray-700 flex items-start"><i class="fas fa-check text-telstra-blue mr-2 mt-1"></i><span :contenteditable="editMode">SEO Content Strategy implementation</span></p>
+                                        <p class="text-sm text-gray-700 flex items-start"><i class="fas fa-check text-telstra-blue mr-2 mt-1"></i><span :contenteditable="editMode">Analysis of key content metrics (Omniture)</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="text-center py-8 text-gray-500 text-sm">
+            <p>© 2024 Rocco Marinelli. Built with modern web technologies.</p>
+        </footer>
+    </div>
+    
+    <!-- Initialize AOS -->
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50
+        });
+    </script>
+</body>
+</html>
