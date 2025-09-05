@@ -107,13 +107,6 @@
 </head>
 <body class="bg-gray-50 telstra-bg" x-data="{ editMode: false, darkMode: false }">
     
-    <!-- Floating Edit Toggle Button -->
-    <button @click="editMode = !editMode" 
-            class="fixed top-4 right-4 z-50 px-4 py-2 bg-telstra-blue text-white rounded-full shadow-lg hover:shadow-xl transition-all no-print"
-            :class="editMode ? 'bg-green-500' : 'bg-telstra-blue'">
-        <i class="fas" :class="editMode ? 'fa-check' : 'fa-edit'"></i>
-        <span x-text="editMode ? 'Editing' : 'Edit Mode'"></span>
-    </button>
     
     <!-- Main Container -->
     <div class="container mx-auto max-w-7xl p-4 py-8">
